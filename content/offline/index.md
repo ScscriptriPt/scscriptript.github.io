@@ -1,4 +1,4 @@
 +++
-title = 'Offline'
+title = '离线'
 layout = 'offline'
 +++

@@ -1,6 +1,20 @@
 main:
-  - name: 文档
-    identifier: documentations
-    url: https://hbs.razonyang.com/v1/zh-hans/docs/
+  - name: About
+    url: /about/
+    weight: 10
     params:
-      icon: '<i class="fas fa-fw fa-book"></i>'
+      icon: '<i class="fas fa-fw fa-user"></i>'
+
+# 说明：
+#   顶部导航栏的「博客 / 归档 / 专栏 / 分类 / 标签」不在这里配置，
+#   它们写在 content/blog、content/archives、content/series、content/categories、
+#   content/tags 各自的 _index.md 里。改名字改那里，加新栏目在下面加一项即可。
+#
+#   原来这里有一条指向主题作者文档站的「文档」链接，已删除。
+#
+#   想加新栏目，照这个格式追加：
+#   - name: 栏目名
+#     url: /路径/
+#     weight: 排序数字（越小越靠前）
+#     params:
+#       icon: '<i class="fas fa-fw fa-图标名"></i>'

@@ -8,15 +8,16 @@ mainSections:
 # titleSeparator: '|' # Title separator. Default to -.
 
 description: 第不知道多少个“行百里者半九十”
-keywords: 生活，大学，计算机，网络安全，电子信息，
+keywords: '生活, 大学, 计算机, 网络安全, 电子信息'
 # images:
 #   - site-feature-image.jpg
 
 # metaRobots: noindex, nofollow # Default value for Meta Tag robots
 # metaRobots:  # disable Meta Tag robots
 
-# logo: images/logo.png # Logo image. Default to images/logo.webp.
-# logo: false # Disable Logo
+# 页头左上角显示的图片。文件在 static/images/logo.webp。
+# 设成 false 就会把图片隐藏、只显示下面的文字；改成图片路径就显示。
+logo: images/logo.webp
 brand: ScscriptriPt
 
 palette: purple # Default palette. Optional. You'll need to clear the browser cache after modifying this.
@@ -170,19 +171,13 @@ creativeCommons:
   #paginate: 5 # Default to 10.
   #moderation: false # Same as Staticman's moderation.
 
-# See https://giscus.app
-giscus:
-  repo: "razonyang/hugo-theme-bootstrap-skeleton" # required.
-  repoId: "R_kgDOHJi95g" # required.
-  category: "General" # required.
-  categoryId: "DIC_kwDOHJi95s4CTy6q" # required.
-  # theme: "dark" # Default to auto.
-  # mapping: "title" # Default to pathname.
-  # inputPosition: "bottom" # Default to top.
-  # reactions: false # Disable reactions.
-  # metadata: true # Emit discussion metadata.
-  # lang: "en" # Specify language, default to site language.
-  # lazyLoading: false # Default to true.
+# 评论区（giscus）。原来的配置指向主题作者的仓库，读者留言会存到他那里，已删除。
+# 以后想开评论区：去 https://giscus.app 按提示装好 GitHub App，它会给你下面四项，填进来即可。
+#giscus:
+  #repo: "你的用户名/你的仓库" # required.
+  #repoId: "生成的编号" # required.
+  #category: "General" # required.
+  #categoryId: "生成的编号" # required.
 
 search:
   paginate: 5 # Pagination. Default to 10.
@@ -205,12 +200,11 @@ search:
   # indexName: ""
   # debug: true
 
-reward:
-  alipay: images/reward/alipay.png
-  wechat: images/reward/wechat.png
-  #paypal: images/reward/paypal.png
-  #patreon: images/reward/patreon.png
-  #liberapay: images/reward/liberapay.png
+# 打赏功能：下面两个图片文件在仓库里并不存在（static/images/reward/），
+# 之前一直显示坏图。要用就打赏图片放进去，然后把注释去掉。
+#reward:
+  #alipay: images/reward/alipay.png
+  #wechat: images/reward/wechat.png
 
 #share:
   #addThis:  # AddThis pubid.
@@ -228,7 +222,7 @@ fontSize:
 pwa:
   manifest:
     # name:  # Default to site title.
-    short_name: HBS
+    short_name: ScscriptriPt
     # display: fullscreen # Default to standalone.
     # description:  # Default to site description.
     # theme_color: 
@@ -243,24 +237,24 @@ pwa:
     #   src: /images/icons/icon-144x144.png
 
 contact:
-  endpoint: https://getform.io/f/56041c81-9e03-4c24-b9c5-61238854d4cd # Backend endpoint, remove this line if you're using Netlify.
+  # 这里原本是主题作者的表单接收地址，填在这里的话访客提交的内容会发到作者那里。
+  # 想用联系表单就填你自己的表单服务地址（例如 https://getform.io/f/你的编号），否则保持注释。
+  #endpoint: https://getform.io/f/你的编号 # Backend endpoint.
   # file: true # Enable file upload
   # fileField: image # The name of file field.
   # reCaptcha:
     # siteKey: ""
 
 repo:
-  url: https://github.com/razonyang/hugo-theme-bootstrap-skeleton
+  url: https://github.com/ScscriptriPt/scscriptript.github.io
   branch: main
   # subPath: exampleSite
   # dateFormat: 02/01/2006, 15:04:05 PM
 
 topAppBar:
-  # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
+  # 页面最顶栏显示的图标。可用项见 https://hbs.razonyang.com/v1/zh-hans/docs/widgets/social-links/
   social:
-    github: razonyang/hugo-theme-bootstrap
-    patreon: razonyang
-    paypal: razonyang
+    github: ScscriptriPt
 
 docs:
   nav:
@@ -271,56 +265,21 @@ docs:
   # content: true
 
 social:
-  # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-  email: user@domain.tld
-  facebook: yourfacebookusername
-  github: razonyang/hugo-theme-bootstrap
-  gitlab: yourgitlabusername
-  linkedin: yourlinkedinusername
-  xing: yourxingusername
-  stackoverflow: yourstackoverflowuserid
-  twitter: yourtwitterusername
-  weibo: yourweibousername
-  zhihu: yourzhihuusername
-  instagram: yourinstagramusername
-  quora: yourquorausername
-  tumblr: yourtumblrusername
-  reddit: yourredditusername
-  telegram: yourtelegramusername
-  qq: yourqqnumber
-  dockerhub: yourdockerhubusername
-  bitbucket: yourbitbucketworkspaceid
-  kaggle: yourkaggleusername
-  medium: yourmediumusername # Medium username or custom domain(e.g. https://custom.domain.tld).
-  lastfm: yourlastfmusername
-  bilibili: yourbilibiliuserid
-  youtube: youryoutubechannelid
-  discord: yourdiscordinvitecode
-  discourse: https://yourforum.tld
-  facebookgroup: yourfacebookgroupname
-  tiktok: yourtiktokusername
-  pinterest: yourpinterestusername
-  mastodon: yourmastodonusername
-  liberapay: yourliberapayaccount
-  paypal: razonyang
-  patreon: razonyang
-  tipeee: yourtipeeeaccount-fr
+  # 页面底部的社交图标。key 是平台名，值是用户名（hbs 会自动拼成链接）。
+  # 只保留你真正在用的，没写的就不会显示。完整平台清单：
+  # https://hbs.razonyang.com/v1/zh-hans/docs/widgets/social-links/
+  github: ScscriptriPt
 
 author:
-  name: Razon Yang
+  name: ScscriptriPt
   # avatar: images/profile.png # Avatar image. Default to "images/profile.webp".
-  bio: 'Gopher, PHPer, Full Stack Engineer.'
-  company: Company # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
-  location: Earth # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
-  # about: https://razonyang.com # The external about page. The internal about page will be used if not set.
+  # bio: '一句话简介，会显示在侧边栏个人资料里。'
+  # company: 你的公司或学校
+  # location: 你所在的城市
+  # about: https://example.com # 填了就用外部链接，不填则用站内 /about/ 页面。
   params: {
     # layout: compact
   }
-  # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
+  # 侧边栏个人资料下方的社交图标。
   social:
-    email: razonyang@gmail.com
-    github: razonyang/hugo-theme-bootstrap
-    twitter: razonyang
-    patreon: razonyang
-    paypal: razonyang
-    rss: "" # Remove RSS
+    github: ScscriptriPt

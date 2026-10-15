@@ -1,12 +1,12 @@
 ---
-# type: docs 
+# type: docs
 title: {{ replace .Name "-" " " | title }}
 date: {{ .Date }}
 featured: false
 draft: true
-comment: true
+comment: false
 toc: true
-reward: true
+reward: false
 pinned: false
 carousel: false
 series:
@@ -15,8 +15,8 @@ tags: []
 images: []
 ---
 
-Summary.
+摘要（会显示在文章列表里）。
 
 <!--more-->
 
-Content.
+正文。

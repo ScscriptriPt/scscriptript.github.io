@@ -1,2 +1,4 @@
-title: HBS 脚手架
+# 这个文件是「中文（zh-hans）」这一语言的专属配置，会覆盖 config.yaml 里的同名项。
+# 原来这里的 title 是模板自带的 "HBS 脚手架"，所以网站标题一直显示模板名，已改掉。
+title: ScscriptriPt Blog
 hasCJKLanguage: true

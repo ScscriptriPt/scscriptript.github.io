@@ -1,8 +1,10 @@
 baseURL: https://scscriptript.github.io/
 title: ScscriptriPt Blog
-copyright: "Copyright © 2026 ScscriptriPt. All Rights Reserved."
+# {year} 会被自动替换成当前年份，不用手动改。
+copyright: "Copyright © {year} ScscriptriPt. All Rights Reserved."
+# 本站只做中文，所以固定为 zh-hans；语言清单在 languages.yaml。
 defaultContentLanguage: zh-hans
-# hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
+hasCJKLanguage: true # 内容是中文，Hugo 需要这个才能正确统计字数和生成摘要。
 # defaultContentLanguageInSubdir: true
 # disableLanguages:
 #  - fr
@@ -28,8 +30,8 @@ build:
   writeStats: true
 
 permalinks:
-  news: /news/:year/:month/:title/
-  blog: /blog/:year/:month/:title/
+  news: /news/:year/:month/:slug/
+  blog: /blog/:year/:month/:slug/
 
 module:
   imports:

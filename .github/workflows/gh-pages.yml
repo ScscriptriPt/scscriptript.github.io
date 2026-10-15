@@ -1,48 +1,51 @@
 name: GitHub Pages
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Setup Go
+        uses: actions/setup-go@v5
         with:
-          node-version: '16'
+          go-version: '1.22'
+          cache: true
 
-      - name: Cache dependencies
-        uses: actions/cache@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-            
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.140.2' # 这里锁定了一个稳定版本
+          extended: true
 
       - name: Install dependencies
         run: npm install
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
 
       - name: Build
         run: hugo --minify --gc --enableGitInfo
 
       - name: Deploy 🚀
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public

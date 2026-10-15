@@ -35,7 +35,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.140.2' # 这里锁定了一个稳定版本
+          hugo-version: '0.148.0' # 这里锁定了一个稳定版本
           extended: true
 
       - name: Install dependencies

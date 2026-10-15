@@ -62,7 +62,13 @@
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2"
   },
-  "devDependencies": {},
   "name": "hugo-theme-bootstrap-skeleton",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "browserslist": [
+    "defaults"
+  ],
+  "devDependencies": {
+    "browserslist": "^4.29.3",
+    "caniuse-lite": "^1.0.30001816"
+  }
 }

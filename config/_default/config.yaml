@@ -1,7 +1,7 @@
-baseURL: https://hbs-skeleton.netlify.app/
-title: Hugo Bootstrap Skeleton
-copyright: 'Copyright © 2016-{year} Razon Yang. All Rights Reserved.'
-defaultContentLanguage: en
+baseURL: https://scscriptript.github.io/
+title: ScscriptriPt Blog
+copyright: "Copyright © 2026 ScscriptriPt. All Rights Reserved."
+defaultContentLanguage: zh-hans
 # hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
 # defaultContentLanguageInSubdir: true
 # disableLanguages:

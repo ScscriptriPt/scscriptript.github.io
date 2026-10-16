@@ -5,5 +5,5 @@ menu:
     identifier: blog
     params:
       icon: '<i class="fas fa-fw fa-blog"></i>'
-      description: '我的所有文章'
+      description: '所有文章'
 ---

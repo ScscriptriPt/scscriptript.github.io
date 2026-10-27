@@ -1,0 +1,13 @@
+# 本地阅读资料，不上传 GitHub
+/docs/明日方舟/
+/docs/assets/明日方舟/
+/se-metadata.json
+/.obsidian/
+
+# MkDocs 构建产物与本地缓存
+/site/
+/.cache/
+
+# Python
+__pycache__/
+*.pyc

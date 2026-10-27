@@ -1,0 +1,178 @@
+site_name: ScscriptriPt
+site_url: https://scscriptript.github.io/
+site_description: 理智欠费，仍在输出。安全、AGI 与其他怪东西。
+copyright: Copyright &copy; 2026 ScscriptriPt
+
+theme:
+  name: material
+  language: zh
+  logo: assets/avatar.jpg
+  favicon: assets/avatar.jpg
+  # 不从 Google Fonts 加载字体（大陆访问不可达），用系统字体栈渲染中文，见 stylesheets/custom.css
+  font: false
+
+  # 深浅色三态切换：跟随系统 / 浅色 / 深色，选择会被记住
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: 跟随系统
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: 切换到浅色模式
+
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    # Tab与锁定Tab栏，方便跳转
+    - navigation.tabs
+    - navigation.tabs.sticky
+    # 关闭: 全能展开
+    # - navigation.sections
+
+    # - navigation.expand
+    # 面包屑
+    # - navigation.path
+    - navigation.indexes
+    # 回到顶部按钮 / 页尾上一篇下一篇
+    - navigation.top
+    - navigation.footer
+    # 目录跟随滚动高亮
+    - toc.follow
+    # 搜索建议 / 命中高亮 / 结果分享
+    - search.suggest
+    - search.highlight
+    - search.share
+    # 代码块：复制按钮 / 悬停选中行
+    - content.code.copy
+    - content.code.select
+
+plugins:
+  - blog:
+      enabled: true
+      blog_dir: blog
+      blog_toc: true
+
+      post_dir: "{blog}/posts"
+      # 时间展示会受到语言影响
+      post_date_format: medium
+      post_url_format: "{slug}"
+      # 区分摘要和正文
+      post_excerpt_separator: <!-- more -->
+
+      archive: true
+
+      # categories_name: 分类
+      categories_url_format: "category/{slug}"
+
+      archive_name: Archive
+      # 归档时间显示，会受语言影响
+      archive_date_format: MMMM yyyy
+
+      authors: false
+  # 博客 RSS 订阅
+  - rss:
+      match_path: "blog/posts/.*"
+      use_git: false
+      date_from_meta:
+        as_creation: date
+  # 这是个奇怪的功能，社交卡片。。。
+  # - social:
+  #   cards_layout_options:
+  #     font_family: Noto Sans SC
+
+# 不参与构建的文件（本地 Obsidian 阅读/草稿用）。
+# 要上架某篇时，删掉对应行并把它加进 nav 即可。
+exclude_docs: |
+  缺德时代/智商下线/傻子与达克效应.md
+  AGI时代/AI妙用——不只是coding/1-管理你的系统.md
+  资源集合/template.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ScscriptriPt/
+  analytics:
+    provider: google
+    property: G-KJB4RXSKZG
+
+nav:
+  - About Me: About-Me.md
+  - Blog:
+      - blog/index.md
+  - AGI时代:
+      - AGI时代/index.md
+      - 未来已来: 
+        - AGI时代/未来已来/index.md
+        - deepseek:
+          - 2026-10-15恢复补偿: AGI时代/未来已来/deepseek/10-15服务补偿.md
+          - 2026-10-20 Flash-1017 与 DeepInfer: AGI时代/未来已来/deepseek/10-20-flash1017-deepinfer.md
+        - GLM:
+          - 赛博鸡蛋: AGI时代/未来已来/GLM/赛博鸡蛋.md
+      - 未来别来！: 
+        - AGI时代/未来别来！/index.md
+        - 最“伟大”的issue: AGI时代/未来别来！/最伟大的issue.md
+      - 原来是劣等模型: AGI时代/原来是劣等模型/index.md
+      - 厂商行为艺术:
+        - AGI时代/厂商行为艺术/index.md
+        - GLM:
+          - 2026-09-18 送蛋的把鸡窝打包了: AGI时代/厂商行为艺术/GLM/09-18-zcode偷跑上传.md
+        - Anthropic:
+          - 达里奥与拒绝的艺术: AGI时代/厂商行为艺术/Anthropic/达里奥的拒绝艺术.md
+  - 缺德时代:
+      - 介绍 && 警告: 缺德时代/正文前介绍和警告.md
+      - 地狱笑话:
+          - intro: 缺德时代/地狱笑话/index.md
+          - 哦耶: 缺德时代/地狱笑话/哦耶.md
+          - 整蛊小游戏: 缺德时代/地狱笑话/整蛊小游戏.md
+          - 心平气和: 缺德时代/地狱笑话/心平气和.md
+      - 脑袋落地: 
+        - intro: 缺德时代/脑袋落地/index.md
+      - 智商下线: 
+        - intro: 缺德时代/智商下线/index.md
+      - 赛博民俗: 
+        - intro: 缺德时代/赛博民俗/index.md
+      - 梗图收容: 
+        - intro: 缺德时代/梗图收容/index.md
+  - 计算机时代:
+      - 计算机时代/index.md
+  - 安全时代:
+      - 安全时代/index.md
+  - 资源集合:
+      - intro: 资源集合/index.md
+      - 靶场与实战平台: 资源集合/靶场与实战平台.md
+      - 安全学习与认证: 资源集合/安全学习与认证.md
+      - 计算机自学与课程: 资源集合/计算机自学与课程.md
+      - 开发工具与框架: 资源集合/开发工具与框架.md
+      - AI 与大模型: 资源集合/AI与大模型.md
+
+extra_css:
+  - stylesheets/custom.css
+
+extra_javascript:
+  - javascripts/blog-sidebar.js
+  - javascripts/external-links.js
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - toc:
+      # 标题悬停显示锚点链接
+      permalink: true
+      # 让中文标题生成可用的锚点
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+          percent_encoded: true

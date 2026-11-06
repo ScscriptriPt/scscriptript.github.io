@@ -1,6 +1,6 @@
 # AI 与大模型
 
-大模型服务与应用平台。
+大模型服务、本地部署与应用平台。
 
 ## 国产
 
@@ -20,3 +20,8 @@
 ## 应用平台
 
 - [Dify](https://dify.ai/zh)：个人使用基本免费
+
+## 本地部署与工具
+
+- [Ollama](https://ollama.com/)：本地跑大模型
+- [Can It Run AI](https://www.canirun.ai/)：测试电脑性能，看本地能部署什么 AI

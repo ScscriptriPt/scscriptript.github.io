@@ -80,6 +80,8 @@ plugins:
       archive_name: Archive
       # 归档时间显示，会受语言影响
       archive_date_format: MMMM yyyy
+      # 按月分页，否则同一年所有文章都会挤进第一个月份的归档页
+      archive_url_date_format: "yyyy/MM"
 
       authors: false
   # 博客 RSS 订阅

@@ -1,0 +1,24 @@
+/* 站点不加载 Google Fonts，以下用系统字体栈保证中文渲染质量：
+   macOS/iOS 用苹方，Windows 用微软雅黑，Linux 回退 Noto CJK */
+
+:root {
+  --md-text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    sans-serif;
+  --md-code-font-family: "Cascadia Code", "JetBrains Mono", Consolas,
+    "Courier New", "PingFang SC", "Microsoft YaHei", monospace;
+}
+
+body,
+.md-typeset {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre,
+.md-typeset pre > code {
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New",
+    "PingFang SC", "Microsoft YaHei", monospace;
+}

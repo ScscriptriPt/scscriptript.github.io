@@ -178,6 +178,9 @@ nav:
       - 认证: 安全资源集合/认证.md
       - 漏洞平台: 安全资源集合/漏洞平台.md
       - 没落遗产: 安全资源集合/没落遗产.md
+  - 从0开始的车联网学习:
+      - 从0开始的车联网学习/index.md
+      - python-can 库说明: 从0开始的车联网学习/python-can库说明.md
 
 extra_css:
   - stylesheets/custom.css

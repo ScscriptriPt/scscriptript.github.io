@@ -8,7 +8,8 @@ theme:
   language: zh
   logo: assets/avatar.jpg
   favicon: assets/avatar.jpg
-  # 不从 Google Fonts 加载字体（大陆访问不可达），用系统字体栈渲染中文，见 stylesheets/custom.css
+  # 不使用 Google Fonts（大陆访问不可达）：JetBrains Mono 由 stylesheets/custom.css 本地自托管，
+  # 中文回退到系统 CJK 字体
   font: false
 
   # 深浅色三态切换：跟随系统 / 浅色 / 深色，选择会被记住
@@ -192,6 +193,14 @@ extra_javascript:
 markdown_extensions:
   - attr_list
   - md_in_html
+  # 代码块语法高亮：Pygments 生成 span，配色由 stylesheets/custom.css 里
+  # 的 --md-code-hl-* 变量控制（Catppuccin 映射）。superfences 负责围栏代码块
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
   - toc:
       # 标题悬停显示锚点链接
       permalink: true

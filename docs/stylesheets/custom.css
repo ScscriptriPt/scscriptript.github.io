@@ -1,24 +1,323 @@
-/* 站点不加载 Google Fonts，以下用系统字体栈保证中文渲染质量：
-   macOS/iOS 用苹方，Windows 用微软雅黑，Linux 回退 Noto CJK */
+/* ==========================================================================
+   视觉风格：Catppuccin（亮色 Latte / 暗色 Mocha）+ 自托管 JetBrains Mono
+   1. 字体：woff2 子集存在 docs/assets/fonts/jetbrains-mono/，不走 Google Fonts
+   2. 配色：通过覆盖 Material 的 CSS 变量实现，深浅两套各自完整定义
+   ========================================================================== */
 
-:root {
-  --md-text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
-    sans-serif;
-  --md-code-font-family: "Cascadia Code", "JetBrains Mono", Consolas,
-    "Courier New", "PingFang SC", "Microsoft YaHei", monospace;
+/* --------------------------------------------------------------------------
+   1. JetBrains Mono（latin / latin-ext，400 与 700 两档，共约 58KB）
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/jetbrains-mono/jetbrains-mono-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-body,
-.md-typeset {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/jetbrains-mono/jetbrains-mono-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/jetbrains-mono/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* JetBrains Mono 没有中文字形，中文按顺序回退到等宽/黑体 CJK 字体 */
+:root {
+  --jbm-text: "JetBrains Mono", "Sarasa Mono SC", "Noto Sans Mono CJK SC",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    monospace;
+  --jbm-code: "JetBrains Mono", "Sarasa Mono SC", "Noto Sans Mono CJK SC",
+    Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+}
+
+/* Material 在 body 上重新定义了 --md-text-font-family / --md-code-font-family，
+   :root 上的同名变量会被 body 的声明盖掉，所以必须写在 body 上 */
+body {
+  --md-text-font-family: var(--jbm-text);
+  --md-code-font-family: var(--jbm-code);
+  font-family: var(--md-text-font-family);
 }
 
 .md-typeset code,
 .md-typeset kbd,
 .md-typeset pre,
 .md-typeset pre > code {
-  font-family: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New",
-    "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: var(--md-code-font-family);
+}
+
+/* --------------------------------------------------------------------------
+   2. Catppuccin 调色板 —— Material 变量映射
+   亮色（prefers-color-scheme: light）用 Latte，暗色用 Mocha
+   -------------------------------------------------------------------------- */
+
+/* 2.1 Latte（亮色）。:root 兜底只在 JS 还没写入 data-md-color-scheme 时生效，
+   否则会盖掉 palette.css 里 [data-md-color-scheme=slate] 的暗色变量 */
+:root:not([data-md-color-scheme]),
+[data-md-color-scheme="default"] {
+  /* Catppuccin Latte 色值 */
+  --ctp-rosewater: #dc8a78;
+  --ctp-flamingo: #dd7878;
+  --ctp-pink: #ea76cb;
+  --ctp-mauve: #8839ef;
+  --ctp-red: #d20f39;
+  --ctp-maroon: #e64553;
+  --ctp-peach: #fe640b;
+  --ctp-yellow: #df8e1d;
+  --ctp-green: #40a02b;
+  --ctp-teal: #179299;
+  --ctp-sky: #04a5e5;
+  --ctp-sapphire: #209fb5;
+  --ctp-blue: #1e66f5;
+  --ctp-lavender: #7287fd;
+  --ctp-text: #4c4f69;
+  --ctp-subtext1: #5c5f77;
+  --ctp-subtext0: #6c6f85;
+  --ctp-overlay2: #7c7f93;
+  --ctp-overlay1: #8c8fa1;
+  --ctp-overlay0: #9ca0b0;
+  --ctp-surface2: #acb0be;
+  --ctp-surface1: #bcc0cc;
+  --ctp-surface0: #ccd0da;
+  --ctp-base: #eff1f5;
+  --ctp-mantle: #e6e9ef;
+  --ctp-crust: #dce0e8;
+
+  /* 正文与底色 */
+  --md-default-fg-color: var(--ctp-text);
+  --md-default-fg-color--light: var(--ctp-subtext1);
+  --md-default-fg-color--lighter: var(--ctp-subtext0);
+  --md-default-fg-color--lightest: var(--ctp-surface2);
+  --md-default-bg-color: var(--ctp-base);
+  --md-default-bg-color--light: #eff1f5a8;
+  --md-default-bg-color--lighter: #eff1f566;
+  --md-default-bg-color--lightest: #eff1f51f;
+
+  /* 页头 / 页脚：扁平化，不用品牌色块 */
+  --md-primary-fg-color: var(--ctp-base);
+  --md-primary-fg-color--light: var(--ctp-surface0);
+  --md-primary-fg-color--dark: var(--ctp-surface1);
+  --md-primary-bg-color: var(--ctp-text);
+  --md-primary-bg-color--light: var(--ctp-subtext1);
+  --md-accent-fg-color: var(--ctp-mauve);
+  --md-accent-fg-color--transparent: #8839ef1a;
+  --md-accent-bg-color: var(--ctp-base);
+  --md-accent-bg-color--light: #eff1f5b3;
+
+  /* 链接 */
+  --md-typeset-color: var(--ctp-text);
+  --md-typeset-a-color: var(--ctp-blue);
+
+  /* 代码块底色用 crust，与 base 拉开一档 */
+  --md-code-fg-color: var(--ctp-text);
+  --md-code-bg-color: var(--ctp-crust);
+  --md-code-bg-color--light: #dce0e8e6;
+  --md-code-bg-color--lighter: #dce0e88a;
+  --md-code-hl-color: #7287fd66;
+  --md-code-hl-color--light: #7287fd1a;
+
+  /* 代码高亮 token（对照 Catppuccin 常规映射） */
+  --md-code-hl-keyword-color: var(--ctp-mauve);
+  --md-code-hl-string-color: var(--ctp-green);
+  --md-code-hl-number-color: var(--ctp-peach);
+  --md-code-hl-constant-color: var(--ctp-yellow);
+  --md-code-hl-function-color: var(--ctp-blue);
+  --md-code-hl-special-color: var(--ctp-pink);
+  --md-code-hl-operator-color: var(--ctp-sky);
+  --md-code-hl-punctuation-color: var(--ctp-overlay2);
+  --md-code-hl-comment-color: var(--ctp-overlay0);
+  --md-code-hl-variable-color: var(--ctp-flamingo);
+  --md-code-hl-generic-color: var(--ctp-subtext0);
+  --md-code-hl-name-color: var(--ctp-text);
+
+  /* 键盘键位、高亮、表格、提示块 */
+  --md-typeset-kbd-color: var(--ctp-mantle);
+  --md-typeset-kbd-accent-color: var(--ctp-sapphire);
+  --md-typeset-kbd-border-color: var(--ctp-surface1);
+  --md-typeset-mark-color: #df8e1d59;
+  --md-typeset-table-color: var(--ctp-surface1);
+  --md-typeset-table-color--light: #ccd0da80;
+  --md-admonition-fg-color: var(--ctp-text);
+  --md-admonition-bg-color: var(--ctp-base);
+
+  /* 页脚 */
+  --md-footer-bg-color: var(--ctp-mantle);
+  --md-footer-bg-color--dark: var(--ctp-crust);
+  --md-footer-fg-color: var(--ctp-text);
+  --md-footer-fg-color--light: var(--ctp-subtext1);
+  --md-footer-fg-color--lighter: var(--ctp-subtext0);
+}
+
+/* 2.2 Mocha（暗色） */
+[data-md-color-scheme="slate"] {
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+
+  --md-default-fg-color: var(--ctp-text);
+  --md-default-fg-color--light: var(--ctp-subtext1);
+  --md-default-fg-color--lighter: var(--ctp-subtext0);
+  --md-default-fg-color--lightest: var(--ctp-surface2);
+  --md-default-bg-color: var(--ctp-base);
+  --md-default-bg-color--light: #1e1e2ea8;
+  --md-default-bg-color--lighter: #1e1e2e66;
+  --md-default-bg-color--lightest: #1e1e2e1f;
+
+  --md-primary-fg-color: var(--ctp-base);
+  --md-primary-fg-color--light: var(--ctp-surface0);
+  --md-primary-fg-color--dark: var(--ctp-surface1);
+  --md-primary-bg-color: var(--ctp-text);
+  --md-primary-bg-color--light: var(--ctp-subtext1);
+  --md-accent-fg-color: var(--ctp-mauve);
+  --md-accent-fg-color--transparent: #cba6f71a;
+  --md-accent-bg-color: var(--ctp-base);
+  --md-accent-bg-color--light: #1e1e2eb3;
+
+  --md-typeset-color: var(--ctp-text);
+  --md-typeset-a-color: var(--ctp-blue);
+
+  --md-code-fg-color: var(--ctp-text);
+  --md-code-bg-color: var(--ctp-crust);
+  --md-code-bg-color--light: #11111be6;
+  --md-code-bg-color--lighter: #11111b8a;
+  --md-code-hl-color: #b4befe59;
+  --md-code-hl-color--light: #b4befe1a;
+
+  --md-code-hl-keyword-color: var(--ctp-mauve);
+  --md-code-hl-string-color: var(--ctp-green);
+  --md-code-hl-number-color: var(--ctp-peach);
+  --md-code-hl-constant-color: var(--ctp-yellow);
+  --md-code-hl-function-color: var(--ctp-blue);
+  --md-code-hl-special-color: var(--ctp-pink);
+  --md-code-hl-operator-color: var(--ctp-sky);
+  --md-code-hl-punctuation-color: var(--ctp-overlay2);
+  --md-code-hl-comment-color: var(--ctp-overlay0);
+  --md-code-hl-variable-color: var(--ctp-flamingo);
+  --md-code-hl-generic-color: var(--ctp-subtext0);
+  --md-code-hl-name-color: var(--ctp-text);
+
+  --md-typeset-kbd-color: var(--ctp-surface0);
+  --md-typeset-kbd-accent-color: var(--ctp-sapphire);
+  --md-typeset-kbd-border-color: var(--ctp-crust);
+  --md-typeset-mark-color: #f9e2af40;
+  --md-typeset-table-color: var(--ctp-surface1);
+  --md-typeset-table-color--light: #31324480;
+  --md-admonition-fg-color: var(--ctp-text);
+  --md-admonition-bg-color: var(--ctp-base);
+
+  --md-footer-bg-color: var(--ctp-mantle);
+  --md-footer-bg-color--dark: var(--ctp-crust);
+  --md-footer-fg-color: var(--ctp-text);
+  --md-footer-fg-color--light: var(--ctp-subtext1);
+  --md-footer-fg-color--lighter: var(--ctp-subtext0);
+}
+
+/* --------------------------------------------------------------------------
+   3. 细节：让 Catppuccin 的层次感更明显
+   -------------------------------------------------------------------------- */
+
+/* 选中文字 */
+::selection {
+  background-color: var(--ctp-lavender);
+  color: var(--ctp-crust);
+}
+
+/* 行内代码：用 surface0 和整块代码（crust）区分开 */
+.md-typeset code {
+  background-color: var(--ctp-surface0);
+  border-radius: 0.2rem;
+}
+
+.md-typeset pre > code,
+.md-typeset .highlight code {
+  background-color: transparent;
+}
+
+.md-typeset pre {
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.2rem;
+}
+
+/* 表格：表头用 surface0，边框用 surface1 */
+.md-typeset table:not([class]) th {
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-text);
+}
+
+/* 顶栏与内容区之间加一根 1px 分隔线，两套配色下都成立 */
+.md-header {
+  border-bottom: 1px solid var(--ctp-surface0);
+}
+
+/* 侧边栏当前页、导航 hover 用 mauve/lavender 而不是 Material 默认蓝 */
+.md-nav__link--active,
+.md-nav__link:is(:focus, :hover) {
+  color: var(--md-accent-fg-color);
+}
+
+/* 代码块复制按钮、回到顶部按钮在深色下更清楚一点 */
+.md-code__button,
+.md-top {
+  color: var(--ctp-subtext0);
+}
+
+/* 搜索框底色 */
+.md-search__input {
+  background-color: var(--ctp-surface0);
+}
+
+.md-search__input::placeholder {
+  color: var(--ctp-overlay1);
 }
